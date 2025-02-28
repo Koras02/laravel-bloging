@@ -10,9 +10,18 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+        // 모든 게시글과 각 게시글의 댓글 
+        $posts = Post::with('comments')->get();
         return view('posts.index', compact('posts'));
+
     }
 
+    public function show($id) 
+    {
+        // 특정 게시글과 댓글 
+        $post = Post::with('comments')->findOrFail($id);
+        return view('posts.show', compact('post'));
+    }   
     public function create()
     {
         return view('posts.create');
@@ -31,10 +40,7 @@ class PostController extends Controller
     }
 
  
-    public function show(Post $post)
-    {
-        return view('posts.show', compact('post'));
-    }
+ 
 
     public function edit(string $id)
     {
