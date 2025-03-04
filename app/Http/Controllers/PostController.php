@@ -28,6 +28,8 @@ class PostController extends Controller
     }
 
  
+
+ 
     public function store(Request $request)
     {
         $request->validate([
@@ -42,10 +44,9 @@ class PostController extends Controller
  
  
 
-    public function edit(string $id)
+    public function edit($id)
     {
-        // ID를 사용해 데이터베이스에서 게시물 조회
-        $post = Post::findOrFail($id);
+        $post = Post::findOrFail($id); // ID로 게시글 조회
         return view('posts.edit', compact('post'));
     }
 
@@ -55,11 +56,10 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
         ]);
-
+    
         $post->update($request->all());
         return redirect()->route('posts.index')->with('success', 'Post updated successfully');
     }
-
     public function destroy(Post $post)
     {
         $post->delete();
