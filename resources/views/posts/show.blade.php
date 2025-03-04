@@ -17,8 +17,10 @@
     @if(session('success'))
       <div>{{ session('success')}}</div>
     @endif
-    <h2><a href="{{ route('posts.create') }}">게시글 생성</a></h3>
-    <h2><a href="{{ route('posts.index') }}">게시글 돌아가기</a></h3>
+    <h2><a href="{{ route('posts.create') }}">게시글 생성</a></h2>
+    <h2><a href="{{ route('posts.edit', $post->id) }}">게시s글 수정</a></h2>
+
+    <h2><a href="{{ route('posts.index') }}">게시글 돌아가기</a></h2>
  
     <h3>
         댓글 작성
