@@ -6,6 +6,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AdminController;
@@ -14,6 +15,9 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 Route::resource('posts', PostController::class);
+
+// 동적 웹 페이지 라우트
+Route::get('/', [PageController::class, 'index']);
 
 // Post Comment Route
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
@@ -25,7 +29,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['role:admin']], function() {
-    Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/admin', [AdminController::class, 'index']);
 });
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile')->middleware('auth');
 
