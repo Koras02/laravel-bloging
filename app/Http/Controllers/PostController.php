@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::all(); // 모든 게시물 가져오기 
+        dd($posts->toArray()); // dd()로 데이터 확인 이 부분에서 실행 중단 후 데이터 출력
+        
         // 모든 게시글과 각 게시글의 댓글 
         $posts = Post::with('comments')->get();
-        return view('posts.index', compact('posts'));
+        
 
+        // 또는 Log::Info()로 로그 남기기
+        Log::info("Posts retrieved", $posts->toArray());
+        return view('posts.index', compact('posts'));
     }
 
     public function show($id) 
