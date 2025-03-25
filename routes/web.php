@@ -20,6 +20,7 @@ Route::resource('posts', PostController::class);
 Route::get('/', [PageController::class, 'index']);
 
 // Post Comment Route
+// Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::get(uri: '/posts/create', action: [PostController::class, 'create'])->name('posts.create');
@@ -35,3 +36,4 @@ Route::get('/profile', [ProfileController::class, 'show'])->name('profile')->mid
 
 // 로그아웃 라우트
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
